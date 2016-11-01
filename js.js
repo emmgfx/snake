@@ -74,6 +74,7 @@ $(function(){
 
             this.position.push(newPoint);
             this.draw();
+            $('.score > span').text(this.position.length);
         }
 
     };

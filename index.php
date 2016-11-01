@@ -16,7 +16,7 @@
 			</div>
 		<?php endfor; ?>
 	</div>
-
+	<div class="score">Score: <span>0</span></div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js.js"></script>
 

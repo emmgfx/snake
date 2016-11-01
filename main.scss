@@ -3,15 +3,12 @@ $color-px-off:      #8bc34a;
 $color-px-on:       #2e7d32;
 $color-cookie:      #E91E63;
 
-*{
-    margin: 0;
-    padding: 0;
-    font-size: 0px;
-}
-
 .snake-screen{
     background-color: $color-screen-bg;
     display: inline-block;
+    margin: 0;
+    padding: 0;
+    font-size: 0px;
 }
 
 .snake-row{
