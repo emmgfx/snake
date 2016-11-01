@@ -1,0 +1,30 @@
+$color-screen-bg:   #009688;
+$color-px-off:      #8bc34a;
+$color-px-on:       #2e7d32;
+
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 0px;
+}
+
+.snake-screen{
+    background-color: $color-screen-bg;
+    display: inline-block;
+}
+
+.snake-row{
+    .snake-col{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: $color-px-off;
+        margin: .5px;
+        // transition: all .4s;
+
+        &.on{
+            background-color: $color-px-on;
+            transition: none;
+        }
+    }
+}
