@@ -1,6 +1,7 @@
 $color-screen-bg:   #009688;
 $color-px-off:      #8bc34a;
 $color-px-on:       #2e7d32;
+$color-cookie:      #E91E63;
 
 *{
     margin: 0;
@@ -20,11 +21,15 @@ $color-px-on:       #2e7d32;
         height: 10px;
         background-color: $color-px-off;
         margin: .5px;
-        // transition: all .4s;
+        transition: all .2s;
 
         &.on{
             background-color: $color-px-on;
-            transition: none;
+        }
+
+        &.cookie{
+            background-color: $color-cookie;
+            transform: scale(1.3) rotate(45deg);
         }
     }
 }

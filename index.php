@@ -8,9 +8,9 @@
 <body>
 
 	<div class="snake-screen">
-		<?php for($y=0; $y<50; $y++): ?>
+		<?php for($y=0; $y<30; $y++): ?>
 			<div class="snake-row">
-				<?php for($x=0; $x<50; $x++): ?>
+				<?php for($x=0; $x<30; $x++): ?>
 					<div class="snake-col" x="<?php echo $x; ?>" y="<?php echo $y; ?>"></div>
 				<?php endfor; ?>
 			</div>

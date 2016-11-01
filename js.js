@@ -5,6 +5,8 @@ const DIRECTION_LEFT    = 3;
 
 $(function(){
 
+    var cookies = Array();
+
     var snake = {
         drawsCount: 0,
         length: 1,
@@ -17,7 +19,8 @@ $(function(){
         draw: function(){
             this.drawsCount++;
             console.log('Drawing snake... ~~~ ' + this.drawsCount + ' draws');
-            $('.snake-col').removeClass('on');
+
+            $('.snake-col:not(.cookie)').removeClass('on');
             for(i = 0; i < this.position.length; i++){
                 $('.snake-col[x='+this.position[i][0]+'][y='+this.position[i][1]+']').addClass('on');
             }
@@ -54,6 +57,15 @@ $(function(){
                     break;
             }
 
+            console.log('Cookies: ' + JSON.stringify(cookies));
+            var checkCookie = Cookie.checkCoords(newPoint);
+            if(checkCookie !== null){
+                increase = true;
+                cookies[checkCookie].remove();
+                cookies.splice(checkCookie, 1);
+                cookies.push(new Cookie);
+            }
+
             if(this.drawsCount % 5 === 0)
                 increase = true;
 
@@ -66,28 +78,58 @@ $(function(){
 
     };
 
+    class Cookie{
+        constructor() {
+            var countRows = $('.snake-row').length;
+            var countCols = $('.snake-row').first().find('.snake-col').length;
+
+            var randomPosition = [
+                (0 + Math.floor(Math.random() * countCols)),
+                (0 + Math.floor(Math.random() * countRows))
+            ];
+
+            this.position = randomPosition;
+            console.log("New cookie at " + JSON.stringify(this.position));
+            this.draw();
+        }
+        draw(){
+            $('.snake-col[x='+this.position[0]+'][y='+this.position[1]+']').addClass('cookie');
+        }
+        remove(){
+            $('.snake-col[x='+this.position[0]+'][y='+this.position[1]+']').removeClass('cookie');
+        }
+
+        static checkCoords(coords){
+            var ret = null;
+            for(i = 0; i < cookies.length; i++){
+                if(
+                    cookies[i].position[0] == coords[0] &&
+                    cookies[i].position[1] == coords[1]
+                ){
+                    ret = i;
+                }
+            }
+            return ret;
+        }
+    }
 
     $(document).keydown(function(e){
-
         if (e.keyCode == 38){
             snake.currentDirection = DIRECTION_UP;
-            console.log('press UP');
         }else if (e.keyCode == 39){
             snake.currentDirection = DIRECTION_RIGHT;
-            console.log('press RIGHT');
         }else if (e.keyCode == 40){
             snake.currentDirection = DIRECTION_DOWN;
-            console.log('press DOWN');
         }else if (e.keyCode == 37){
             snake.currentDirection = DIRECTION_LEFT;
-            console.log('press LEFT');
         }
         snake.updatePosition();
     });
 
-    snake.setStartPosition();
-    snake.draw();
+    cookies.push(new Cookie, new Cookie, new Cookie, new Cookie);
 
+    snake.setStartPosition();
+    snake.draw(true);
     // Using the Atticweb response @ http://stackoverflow.com/a/31140418/1378408
 
     var timer = {
